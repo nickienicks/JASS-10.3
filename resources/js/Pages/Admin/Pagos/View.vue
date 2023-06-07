@@ -312,7 +312,7 @@
                                 class="bg-white flex justify-around border border-2 border-sky-500 mx-2 h-24"
                             >
                                 <p>Sello y firma del Tesorero</p>
-                                <p>Sello y firma del presidente></p>
+                                <p>Sello y firma del Presidente</p>
                             </div>
                             <div class="flex ml-6">
                         <button
