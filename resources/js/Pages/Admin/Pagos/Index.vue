@@ -139,7 +139,7 @@ watch(search, (value) => {
 });
 
 function getContact() {
-    Inertia.get(
+    router.get(
         "/admin/deudas",
         { perPage: perPage.value, search: search.value },
         {

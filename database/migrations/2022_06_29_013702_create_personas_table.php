@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->integer('dni');
-            $table->date('corte');
+            $table->date('corte')->nullable();
             $table->boolean('reconection');
             $table->string('direccion');
             $table->string('zona');

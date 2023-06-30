@@ -9,6 +9,15 @@
     <script src="{{ asset('js/app.js') }}" defer></script>   
     
 <style>
+  .estilo-corte{
+    background-color: red;
+    color:white;
+    padding: 1rem;
+    font-weight: 200;
+    font-size: 2em;
+    -webkit-text-stroke: 1rem black;
+    
+  }
   .bg-gray-300 {
     background-color: #d1d5db;
   }
@@ -22,52 +31,52 @@
   html, body{
   height:100%;
   
-}
-  .div2{
-  height:100%;
-  
-}
-.jaa { outline: 2px blue; }
-table {
-  border-color: rgb(24, 23, 22);
-  border-radius: 10% / 50%;
-}
-th {
-  border-color: rgb(24, 23, 22);
-  /* border-radius: 10% / 50%; */
-}
-tr {
-  border-color: rgb(24, 23, 22);
-  border-radius: 10% / 50%;
-}
-td {
-  border-color: rgb(24, 23, 22);
-  /* border-radius: 10% / 50%; */
-}
-tbody {
-  border-color: rgb(24, 23, 22);
-  border-radius: 10% / 50%;
-}
-#corte {
-  font-weight: bolder;
-}
-#corte1 {
-  font-weight: bolder;
-  font-size: large;
-}
-#padi{
-  padding-right:10px;
-}
-#corte2{
-  padding-right:15px;
-  font-weight: bolder;
-  font-size: large;
-}
-#logo{
-  width: 120px;
+  }
+    .div2{
+    height:100%;
+    
+  }
+  .jaa { outline: 2px blue; }
+  table {
+    border-color: rgb(24, 23, 22);
+    border-radius: 10% / 50%;
+  }
+  th {
+    border-color: rgb(24, 23, 22);
+    /* border-radius: 10% / 50%; */
+  }
+  tr {
+    border-color: rgb(24, 23, 22);
+    border-radius: 10% / 50%;
+  }
+  td {
+    border-color: rgb(24, 23, 22);
+    /* border-radius: 10% / 50%; */
+  }
+  tbody {
+    border-color: rgb(24, 23, 22);
+    border-radius: 10% / 50%;
+  }
+  #corte {
+    font-weight: bolder;
+  }
+  #corte1 {
+    font-weight: bolder;
+    font-size: large;
+  }
+  #padi{
+    padding-right:10px;
+  }
+  #corte2{
+    padding-right:15px;
+    font-weight: bolder;
+    font-size: large;
+  }
+  #logo{
+    width: 120px;
 
-  
-}
+    
+  }
 </style>
     
     <title>Document</title>
@@ -86,7 +95,7 @@ tbody {
           $cortee=null;
 
           foreach ($elo as $key => $con) {
-            if($con->type == true){
+            if($con->type == 2){
                 $cortee= $con;
                 unset($elo[$key]);
               }
@@ -193,18 +202,11 @@ tbody {
         $montoe2=0;
         
         $all=$contac->medida_act - $contac->medida_ant;
-          if( $all <= 7 ){
-            $montoe1=14;
+          if( $all > 20 ){
+            $montoe1=20 *2;
+            $montoe2= ($all-20)*3;
           }else{
-              $montoe1=14;
-              
-              if ($all> 20) {
-                  $montoe = ($all-7) * 3;
-                  $montoe2 = $montoe;
-              } else {
-                  $montoe = ($all-7) * 2;
-                  $montoe2 = $montoe;
-              }
+            $montoe1=$all*2;
           }
         @endphp
       <tr>
@@ -327,16 +329,17 @@ tbody {
       <tr style=" height:150px; ">
         @php
          $date4=\Carbon\Carbon::parse($contac->fecha)->translatedFormat('d F  Y');
-         if($cort = '2001-01-01'){
+         if($cort == '2001-01-01'){
           $date5=\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('last day of this month')->translatedFormat('d F  Y');
          
          }else{
           $date5=\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y');
          }
+         $corte_parse=\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y');
         @endphp
         
         <td class="text-center" >{{$date4}}</td>
-        <td class=" text-center "> {{$date5}}</td>
+        <td class=" text-center "> {{$corte_parse}}</td>
         <td id="corte2" class="text-right">S/. {{$aea1+ $monttt}}.00</td>
       </tr>
       <tr>
@@ -367,18 +370,14 @@ tbody {
         @php
           $estC='2001-01-01';
           $estd=$cort;
-          $mensaje="";
+          $mensaje="CANCELE A TIEMPO";
           $sies= count($array);
-          if($sies < 1){
-            $mensaje="Cancele a tiempo";
-          }else{
-            $mensaje="Cancele a tiempo y evite el CORTE!!!";
-          }
+          
           if($cortee){
             $mensaje= "SU SERVICIO ESTÁ EN CORTE";
           }
         @endphp
-        <td id="corte" class="border uppercase border-slate-700" colspan="2">{{$mensaje}}</td>
+        <td id="corte" class="border uppercase border-slate-700 {{ $cortee ? 'estilo-corte': ''}}"  colspan="2">{{$mensaje}}</td>
         
       </tr>  
       

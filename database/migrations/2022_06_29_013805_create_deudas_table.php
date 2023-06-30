@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('monto');
             $table->integer('medida_ant');
             $table->integer('medida_act');
-            $table->boolean('type');
+            $table->integer('type');
             
             $table->unsignedBigInteger('persona_id');
             $table->foreign('persona_id')->references('id')->on('personas')->onDelete('cascade');

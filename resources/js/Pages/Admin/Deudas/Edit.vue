@@ -174,7 +174,7 @@ const form = useForm({
 });
 // const montoCalculado = ref(parseInt(calcularMonto));
 function updateDeuda() {
-    Inertia.post(
+    router.post(
         "/admin/deudas/" + props.persona.id + "/update/" + props.deuda.id,
         {
             _method: "put",

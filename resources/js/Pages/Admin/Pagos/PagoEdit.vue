@@ -158,12 +158,7 @@ const form = useForm({
 });
 const total = ref(props.deuda.monto - parseInt(form.monto));
 function updatePagos() {
-    Inertia.post(
-        "/admin/pagos/" +
-            props.persona.id +
-            "/update/" +
-            props.deuda.id +
-            "/pagoedit",
+    router.post(`/admin/pagos/${props.persona.id}/update/${props.deuda.id}/pagoedit`,
         {
             _method: "put",
             fecha: form.fecha,

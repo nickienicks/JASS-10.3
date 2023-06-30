@@ -180,16 +180,15 @@ function cancel() {
 var calcularMonto = computed(() => {
     let montoTotal = 0;
     let montoResta = 0;
+    let resta1=0;
     try {
         let resta = parseInt(form.medida_act) - parseInt(form.medida_ant);          
-        if (resta <= 7) {
-            montoTotal = 14;
+        if (resta <= 20) {
+            montoTotal = resta * 2;
         } else {
-            if (resta > 20) {
-                montoTotal = ((resta - 7) * 3) + 14;
-            } else {
-                montoTotal = resta * 2;
-            }
+            resta1 = resta - 20;
+            montoTotal = ((resta1*3) + 40);
+            
         }
         if (isNaN(montoTotal)) {
             parseFloat(montoTotal);

@@ -73,7 +73,7 @@ class DeudasController extends Controller
             Deuda::create([
            'fecha'=> Request::input('fecha'),  
            'monto'=> Request::input('monto'),
-           'type'=>false,
+           'type'=>1,
            'medida_ant'=> Request::input('medida_ant'),
            'medida_act'=> Request::input('medida_act'),
            'persona_id' => Request::input('persona_id'),

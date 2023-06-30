@@ -122,7 +122,7 @@ const search = ref(props.filters.search);
 const perPage = ref("");
 
 watch(search, (value) => {
-    Inertia.get(
+    router.get(
         "/admin/historiales",
         { search: value, perPage: perPage.value },
         {
@@ -133,7 +133,7 @@ watch(search, (value) => {
 });
 
 function getContact() {
-    Inertia.get(
+    router.get(
         "/admin/historiales",
         { perPage: perPage.value, search: search.value },
         {

@@ -72,7 +72,7 @@
                                                     v-if="deuda.monto === 0"
                                                 ></template>
                                                 <template v-else>
-                                                    <TableData v-if=" deuda.type == 1">
+                                                    <TableData v-if=" deuda.type == 2">
                                                         Corte y Reconexión
                                                     </TableData>
                                                     <TableData v-else>{{

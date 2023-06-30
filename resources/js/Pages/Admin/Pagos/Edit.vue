@@ -75,7 +75,13 @@
                         >
                             Regresar
                         </Link>
-                        <jet-button class="mx-4"> Confirmar Pago </jet-button>
+                        <button 
+                            class="bg-blue-500 
+                            hover:bg-blue-700 px-4 py-2 
+                            rounded-lg text-white mx-4" 
+                            @click="updateDeudas"> 
+                            Confirmar Pago 
+                        </button>
                         
                         <a
                             class="bg-amber-500 hover:bg-amber-700 px-4 py-2 rounded-lg text-white"
@@ -122,8 +128,8 @@ const formUpdate = useForm({
     persona_id: props.persona.id,
 });
 function updateDeudas() {
-    Inertia.post(
-        "/admin/pagos/" + props.persona.id + "/update/" + props.deuda.id,
+    router.post(
+        `/admin/pagos/ ${props.persona.id}/update/${props.deuda.id}`,
         {
             _method: "put",
             fecha: formUpdate.fecha,
