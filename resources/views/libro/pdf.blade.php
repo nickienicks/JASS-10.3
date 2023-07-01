@@ -96,7 +96,9 @@
 
           foreach ($elo as $key => $con) {
             if($con->type == 2){
+              if($con->monto > 0){
                 $cortee= $con;
+              }
                 unset($elo[$key]);
               }
 
@@ -328,14 +330,14 @@
       </tr>
       <tr style=" height:150px; ">
         @php
-         $date4=\Carbon\Carbon::parse($contac->fecha)->translatedFormat('d F  Y');
+         $date4=ucwords(\Carbon\Carbon::parse($contac->fecha)->translatedFormat('d F  Y'));
          if($cort == '2001-01-01'){
-          $date5=\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('last day of this month')->translatedFormat('d F  Y');
+          $date5=ucwords(\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('last day of this month')->translatedFormat('d F  Y'));
          
          }else{
-          $date5=\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y');
+          $date5=ucwords(\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y'));
          }
-         $corte_parse=\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y');
+         $corte_parse=ucwords(\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y'));
         @endphp
         
         <td class="text-center" >{{$date4}}</td>

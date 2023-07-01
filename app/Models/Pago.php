@@ -33,7 +33,11 @@ class Pago extends Model
             $ults = Deuda::all()->where('persona_id',$idper)->where('monto',true);
             $counts=count($ults); */
           //  if($counts < 3 ){
-                $persona1->update(['corte'=>null,]); 
+                $persona1->update([
+                    'corte'=>null,
+                    'reconection'=>false
+            ]); 
+                
            // }
 
         });

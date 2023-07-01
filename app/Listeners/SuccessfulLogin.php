@@ -35,6 +35,7 @@ class SuccessfulLogin
                        'medida_ant'=> 0,
                        'medida_act'=> 0,
                        'persona_id' => $prue->id,
+                       
                     ]);
 
                     $idd_l= $prue->id;
@@ -44,6 +45,7 @@ class SuccessfulLogin
 
                     if($perso_idd){
                         $perso_idd->corte=$fechaa1;
+                        $perso_idd->reconection=true;
                         $perso_idd->save();
                         
                     }

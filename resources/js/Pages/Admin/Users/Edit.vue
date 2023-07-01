@@ -4,7 +4,7 @@
             <h2
                 class="font-semibold text-xl text-gray-800 leading-tight container"
             >
-                Nuevo Usuario
+                EDITAR USUARIO
             </h2>
         </template>
 
@@ -66,6 +66,7 @@
                                         <jet-input
                                             id="dni"
                                             type="text"
+                                            maxlength="8"
                                             class="mt-1 block w-full"
                                             v-model="form.dni"
                                             autofocus
@@ -82,24 +83,24 @@
                                     </div>
                                     <div class="">
                                         <jet-label
-                                            for="direction"
+                                            for="direccion"
                                             value="Direccion"
                                         />
                                         <jet-input
-                                            id="direction"
+                                            id="direccion"
                                             type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.direction"
+                                            v-model="form.direccion"
                                             autofocus
-                                            autocomplete="direction"
+                                            autocomplete="direccion"
                                             placeholder="Direccion de usuario..."
                                         />
 
                                         <div
                                             class="text-sm text-red-400"
-                                            v-if="form.errors.direction"
+                                            v-if="form.errors.direccion"
                                         >
-                                            {{ form.errors.direction }}
+                                            {{ form.errors.direccion }}
                                         </div>
                                     </div>
                                     <div class="">
@@ -109,21 +110,21 @@
                                         />
                                         <select 
                                             class=" mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                                            id="medidor_id"
+                                            id="zona"
                                             type="text"
-                                            placeholder="Zona..."
+                                            
                                             v-model="form.zona"
                                             autofocus >
-                                                <option value="zona 1">Zona 1</option>
-                                                <option value="zona 2">Zona 2</option>
-                                                <option value="zona 3">Zona 3</option>
-                                                <option value="zona 4">Zona 4</option>
-                                                <option value="zona 5">Zona 5</option>
-                                                <option value="zona 6">Zona 6</option>
-                                                <option value="zona 7">Zona 7</option>
-                                                <option value="zona 8">Zona 8</option>
-                                                <option value="zona 9">Zona 9</option>
-                                                <option value="zona 10">Zona 10</option>
+                                                <option value="1">Zona 1</option>
+                                                <option value="2">Zona 2</option>
+                                                <option value="3">Zona 3</option>
+                                                <option value="4">Zona 4</option>
+                                                <option value="5">Zona 5</option>
+                                                <option value="6">Zona 6</option>
+                                                <option value="7">Zona 7</option>
+                                                <option value="8">Zona 8</option>
+                                                <option value="9">Zona 9</option>
+                                                <option value="10">Zona 10</option>
                                         </select>
 
                                         <div
@@ -174,19 +175,12 @@ const form = useForm({
     firstname: props.persona.first_name,
     lastname: props.persona.last_name,
     dni: props.persona.dni,
-    direction: props.persona.direccion,
-    medidor_id: props.persona.medidor_id,
+    direccion: props.persona.direccion,
+    zona: props.persona.zona,
 });
 
 function updateUser() {
-    Inertia.post("/admin/usuarios/" + props.persona.id, {
-        _method: "put",
-        firstname: form.firstname,
-        lastname: form.lastname,
-        dni: form.dni,
-        direccion: form.direction,
-        medidor_id: form.medidor_id,
-    });
+    form.put(`/admin/usuarios/ ${props.persona.id}`);
 }
 </script>
 

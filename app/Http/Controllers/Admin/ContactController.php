@@ -106,9 +106,9 @@ class ContactController extends Controller
          Request::validate([
                 'firstname' => "required",
                 'lastname' => "required",  
-                'dni' => "required",
+                'dni' => "required|numeric|digits:8",
                 'direccion' => "required",
-                'medidor_id' => "required"
+                'zona' => "required"
                
         ]);
 
@@ -119,8 +119,8 @@ class ContactController extends Controller
             
             'dni' => Request::input('dni'),
             'direccion' => Request::input('direccion'),
-            'medidor_id' => Request::input('medidor_id'),
-            'user_id' => auth()->id(),
+            
+            'zona'=> Request::input('zona')
          
          ]);
  

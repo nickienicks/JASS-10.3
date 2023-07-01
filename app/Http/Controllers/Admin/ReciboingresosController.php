@@ -22,7 +22,7 @@ class ReciboingresosController extends Controller
     {
         $suma3 = $persona->deudas->sum('monto');
         /* $deudass= Persona::where('id',$persona->id)->deudas->where('monto','!=','0'); */
-        $deudass = DB::table('deudas')->where('persona_id', $persona->id)->where('monto','>',0)->orderBy('fecha')->get();
+        $deudass = DB::table('deudas')->where('persona_id', $persona->id)->where('monto','>',0)->orderByDesc('fecha')->get();
         /* $deudass= $persona->deudas;
         $deudass= $deudass->where('monto',true)->toArray(); */
        
