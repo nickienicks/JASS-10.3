@@ -130,6 +130,41 @@ class DeudasController extends Controller
         ]);
     }
 
+    public function corte_manual_view(Persona $persona){
+
+        return Inertia::render("Admin/Deudas/CorteView", [
+            'persona' => $persona,
+            
+        ]);
+
+    }
+
+    public function corte_manual_store(Persona $persona){
+        Request::validate([
+            'fecha' => 'required' 
+         ]);
+         $fecha_c=Request::input('fecha');
+        Deuda::create([
+            'fecha'=> Request::input('fecha'),  
+            'monto'=> Request::input('monto'),
+            'type'=>2,
+            'medida_ant'=>0,
+            'medida_act'=>0,
+            'persona_id' => Request::input('persona_id'),
+        ]);
+
+        $fecha_corte=Carbon::parse( $fecha_c);
+        $fechaa1=$fecha_corte->firstOfMonth()->addDays(19);
+        
+            $persona->corte= $fechaa1;
+            $persona->reconection=true;
+            $persona->save();
+            
+        
+
+        return Redirect::route('admin.deudas.index')->with('flash.banner', 'Exito!! Corte Agregado');
+    }
+
 
     public function usePDF(){
         

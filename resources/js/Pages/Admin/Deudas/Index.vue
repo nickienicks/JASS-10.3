@@ -100,9 +100,20 @@
                                                         contact.id
                                                     )
                                                 "
-                                                class="bg-red-500 hover:bg-red-700 px-4 py-2 rounded-lg text-white"
+                                                class="bg-blue-600 hover:bg-blue-900 px-4 py-2 rounded-lg text-white"
                                             >
                                                 Agregar Deuda
+                                            </Link>
+                                            <Link
+                                                :href="
+                                                    route(
+                                                        'admin.deudas.corte_manual_view',
+                                                        contact.id
+                                                    )
+                                                "
+                                                class="bg-red-500 hover:bg-red-700 px-4 py-2 rounded-lg text-white"
+                                            >
+                                                Agregar Corte
                                             </Link>
                                         </div>
                                     </TableData>
@@ -144,7 +155,7 @@ watch(search, (value) => {
 });
 function getContact() {
     router.get(
-        "/admin/deudas",
+        `/admin/deudas/${persona.id}/corte-manual/view,`,
         { perPage: perPage.value, search: search.value },
         {
             preserveState: true,

@@ -32,7 +32,9 @@ Route::get('deudas/{persona:id}/edit/{deuda:id}', [DeudasController::class, 'edi
 Route::put('deudas/{persona:id}/update/{deuda:id}', [DeudasController::class, 'update'])->name('deudas.update');
 Route::post("deudas/{persona:id}/store", [DeudasController::class, "store"])->name("deudas.store");
 Route::get("deudas/pdf", [DeudasController::class, "usePDF"])->name("deudas.pdf");
-
+//deudas-> corte manual 
+Route::get("deudas/{persona:id}/corte-manual/view",[DeudasController::class, "corte_manual_view"])->name("deudas.corte_manual_view");
+Route::post("deudas/{persona:id}/corte-manual/store",[DeudasController::class, "corte_manual_store"])->name("deudas.corte_manual_store");
 //Pagos
 Route::get("pagos", [PagosController::class, "index"])->name("pagos.index");
 Route::get("pagos/{persona:id}/create/{deuda:id}", [PagosController::class, "create"])->name("pagos.create");
@@ -56,6 +58,7 @@ Route::post("pagorecibo/{persona:id}/store/{reciboingreso:monto}", [Reciboingres
 //cortes
 Route::get("cortes", [CortesController::class, "index"])->name("cortes.index");
 Route::get("cortes/{data}/pdf",[CortesController::class, "usePDF"])->name("cortes.pdf");
+
 //Historial
 Route::get("historiales", [HistorialController::class, "index"])->name("historiales.index");
 Route::get('historiales/{persona:id}/show', [HistorialController::class, 'show'])->name('historiales.show');

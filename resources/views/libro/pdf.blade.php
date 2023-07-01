@@ -330,17 +330,24 @@
       </tr>
       <tr style=" height:150px; ">
         @php
+
+        $date_unit='';
+        $corte_parse='';
+
+        
+
          $date4=ucwords(\Carbon\Carbon::parse($contac->fecha)->translatedFormat('d F  Y'));
-         if($cort == '2001-01-01'){
-          $date5=ucwords(\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('last day of this month')->translatedFormat('d F  Y'));
-         
+         if($cort == null){
+          $corte_parse=ucwords(\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('last day of this month')->translatedFormat('d F  Y'));
+          $date_unit=ucwords(\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('first day of this month')->translatedFormat('d F  Y'));
          }else{
-          $date5=ucwords(\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y'));
+          $corte_parse=ucwords(\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y'));
+          $date_unit=ucwords(\Carbon\Carbon::parse($cort)->addDays(10)->modify('first day of this month')->translatedFormat('d F  Y'));
          }
-         $corte_parse=ucwords(\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y'));
+         
         @endphp
         
-        <td class="text-center" >{{$date4}}</td>
+        <td class="text-center" >{{$date_unit}}</td>
         <td class=" text-center "> {{$corte_parse}}</td>
         <td id="corte2" class="text-right">S/. {{$aea1+ $monttt}}.00</td>
       </tr>

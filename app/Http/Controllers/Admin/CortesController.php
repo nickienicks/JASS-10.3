@@ -18,20 +18,7 @@ class CortesController extends Controller
     {
          
         $perPage = Request::input('perPage')? : 5;
-
-       // $datetoday=Carbon::now();
-
         $contar=Persona::where('corte','!=',null)->where('corte','<=',Carbon::now()->format('Y-m-d'))->where('reconection',true);
-       // $contar2=$contar->where('corte',);
-        /* ->whereHas('deudas', function ($query) {
-            $query->latest('id')->first();
-        })->get();
-
-        $lastdeuda= $contar; */
-        /* $todou=Dudas::last
-        $todou=Persona::with('deudas')->last('deudas','fechas')->get();
-        $lastd=$todou;
-        $lastdeuda=$lastd; */
 
         return Inertia::render("Admin/Cortes/Index", [      
            
