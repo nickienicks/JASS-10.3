@@ -26,10 +26,23 @@ class ImprimirController extends Controller
         $deuda = Deuda::latest('id')->first();
      
        /*  $contacts = Persona::with('deudas')->get(); */
-        $contacts= Persona::where('zona',$zonas)->with(['deudas' => function($query) {
-            $query->where('monto','>','0')    
+       $contacts = Persona::where('zona', $zonas)
+        ->whereHas('deudas', function ($query) {
+            $query->where('monto', '>', 0);
+        })
+        ->with(['deudas' => function ($query) {
+            $query->where('monto', '>', 0)
+                ->orderBy('fecha');
+        }])
+        ->get();
+
+        /* $contacts1= Persona::where('zona',$zonas)
+        ->has('deudas', '>', 0)
+        ->with(['deudas' => function($query) {
+            $query->where('monto','>',0)    
             ->orderBy('fecha');
-        }])->get();
+        }])->get(); */
+
         $pdf = PDF::loadView('libro.pdf', compact('contacts', 'deuda','now'));
 
         /* return $contacts3; */

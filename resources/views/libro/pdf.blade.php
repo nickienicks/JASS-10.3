@@ -331,26 +331,30 @@
       <tr style=" height:150px; ">
         @php
 
-        $date_unit='';
-        $corte_parse='';
+        $datee='';
+        $corteloc='';
 
-        
+        $hola='';
 
          $date4=ucwords(\Carbon\Carbon::parse($contac->fecha)->translatedFormat('d F  Y'));
-         if($cort == null){
-          $corte_parse=ucwords(\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('last day of this month')->translatedFormat('d F  Y'));
-          $date_unit=ucwords(\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('first day of this month')->translatedFormat('d F  Y'));
+         if($cort ){
+          
+          $corteloc=ucwords(\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y'));
+          $datee=ucwords(\Carbon\Carbon::parse($cort)->modify('first day of this month')->translatedFormat('d F  Y'));
          }else{
-          $corte_parse=ucwords(\Carbon\Carbon::parse($cort)->translatedFormat('d F  Y'));
-          $date_unit=ucwords(\Carbon\Carbon::parse($cort)->addDays(10)->modify('first day of this month')->translatedFormat('d F  Y'));
+          
+          $datee=ucwords(\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('first day of this month')->translatedFormat('d F  Y'));
+          $corteloc=ucwords(\Carbon\Carbon::parse($contac->fecha)->addDays(10)->modify('last day of this month')->translatedFormat('d F  Y'));
          }
+         
          
         @endphp
         
-        <td class="text-center" >{{$date_unit}}</td>
-        <td class=" text-center "> {{$corte_parse}}</td>
+        <td class="text-center" >{{$datee}}</td>
+        <td class=" text-center "> {{$corteloc}}</td>
         <td id="corte2" class="text-right">S/. {{$aea1+ $monttt}}.00</td>
       </tr>
+      
       <tr>
         <td  ><a style="visibility:hidden;">.</a></td>
         <td class=" text-center "></td>

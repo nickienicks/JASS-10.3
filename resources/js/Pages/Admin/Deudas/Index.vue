@@ -144,7 +144,7 @@ const props = defineProps({
 const search = ref(props.filters.search);
 const perPage = ref("");
 watch(search, (value) => {
-    Inertia.get(
+    router.get(
         "/admin/deudas",
         { search: value, perPage: perPage.value },
         {

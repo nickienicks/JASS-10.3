@@ -16,8 +16,33 @@ class SuccessfulLogin
     }
     public function handle(Login $event):void
     {
+        $personas = Persona::whereDoesntHave('deudas', function ($query) {
+            $query->where('type', 2)
+                  ->where('monto', '>', 0);
+        })->get();
+        foreach ($personas as $persona) {
+            
+                $persona->corte = null;
+                $persona->save();
+           
+        }
+       /*  $personas = Persona::whereDoesntHave('deudas', function ($query) {
+            $query->where('type', 2)
+                  ->where('monto', '>', 0);
+        })->get();
         
-        $today1=Carbon::today();
+        foreach ($personas as $persona) {
+            $ultimaDeuda = Deuda::where('persona_id', $persona->id)
+                ->orderBy('fecha', 'desc')
+                ->first();
+        
+            if ($ultimaDeuda) {
+                $persona->corte = $ultimaDeuda->fecha;
+                $persona->save();
+            }
+        } */
+        
+        /* $today1=Carbon::today();
         $prueba=DB::table('personas')->where('corte','<',$today1)->where('corte','!=',null )->get();
         
         if(sizeof($prueba) > 0){
@@ -27,7 +52,7 @@ class SuccessfulLogin
                 $count_deu = DB::table('deudas')->where('persona_id',$prue->id)->where('type',1)->where('monto','>',0)->get();
                 $c_count_deu= count($count_deu);
                 $cdui=count($dui);
-                if($cdui == 0 && $c_count_deu > 2){
+                if($cdui == 0 && $c_count_deu >= 3){
                     Deuda::create([
                         'fecha'=> $today1,  
                        'monto'=> 30,
@@ -40,7 +65,7 @@ class SuccessfulLogin
 
                     $idd_l= $prue->id;
                     $fecha_corte=Carbon::parse( $prue->corte);
-                    $fechaa1=$fecha_corte->firstOfMonth()->addDays(19);
+                    $fechaa1=$fecha_corte->firstOfMonth()->day(20);
                     $perso_idd= Persona::find($idd_l);
 
                     if($perso_idd){
@@ -51,6 +76,6 @@ class SuccessfulLogin
                     }
                 }
             }
-        }
+        } */
     }  
 }

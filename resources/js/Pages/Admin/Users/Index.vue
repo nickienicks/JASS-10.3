@@ -168,7 +168,7 @@ const perPage = ref("");
 const showConfirmationModal = ref(false);
 
 watch(search, (value) => {
-    Inertia.get(
+    router.get(
         "/admin/usuarios",
         { search: value, perPage: perPage.value },
         {
