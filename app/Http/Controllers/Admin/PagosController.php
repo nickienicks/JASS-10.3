@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request as Request1;
 use App\Models\Deuda;
 use App\Models\Pago;
 use App\Models\Persona;

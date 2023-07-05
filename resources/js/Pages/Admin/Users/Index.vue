@@ -189,7 +189,7 @@ function destroyContact(id){
     );
 }
 function getContact() {
-    Inertia.get(
+    router.get(
         "/admin/usuarios",
         { perPage: perPage.value, search: search.value },
         {

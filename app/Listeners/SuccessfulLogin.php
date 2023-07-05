@@ -16,7 +16,7 @@ class SuccessfulLogin
     }
     public function handle(Login $event):void
     {
-        $personas = Persona::whereDoesntHave('deudas', function ($query) {
+        /* $personas = Persona::whereDoesntHave('deudas', function ($query) {
             $query->where('type', 2)
                   ->where('monto', '>', 0);
         })->get();
@@ -25,7 +25,7 @@ class SuccessfulLogin
                 $persona->corte = null;
                 $persona->save();
            
-        }
+        } */
        /*  $personas = Persona::whereDoesntHave('deudas', function ($query) {
             $query->where('type', 2)
                   ->where('monto', '>', 0);
@@ -42,8 +42,8 @@ class SuccessfulLogin
             }
         } */
         
-        /* $today1=Carbon::today();
-        $prueba=DB::table('personas')->where('corte','<',$today1)->where('corte','!=',null )->get();
+         $today1=Carbon::today();
+        $prueba=DB::table('personas')->where('corte','!=',null )->get();
         
         if(sizeof($prueba) > 0){
 
@@ -76,6 +76,6 @@ class SuccessfulLogin
                     }
                 }
             }
-        } */
+        } 
     }  
 }

@@ -140,7 +140,7 @@ watch(search, (value) => {
 
 function getContact() {
     router.get(
-        "/admin/deudas",
+        "/admin/pagos",
         { perPage: perPage.value, search: search.value },
         {
             preserveState: true,

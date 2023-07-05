@@ -11,9 +11,20 @@
             <div class=" ml-8 mt-4 relative">
                 <button
                     onclick="window.print()"
+                    hidden
                     class="bg-yellow-200  print:hidden text-yellow-900 py-2 px-4 rounded shadow hover:shadow-xl hover:bg-yellow-300 duration-300"
                     >
                     Imprimir
+                </button>
+                <button
+                    class="bg-yellow-200  print:hidden text-yellow-900 py-2 px-4 rounded shadow hover:shadow-xl hover:bg-yellow-300 duration-300"
+                    >
+                    <a
+                        href="/admin/cortes/pdf"
+                        target="_blank"
+                        >Imprimir 
+                    </a>
+                   
                 </button>
             </div>
             <div class="container">
@@ -132,7 +143,7 @@ const search = ref(props.filters.search);
 const perPage = ref("");
 
 watch(search, (value) => {
-    Inertia.get(
+    router.get(
         "/admin/cortes",
         { search: value, perPage: perPage.value },
         {
@@ -143,7 +154,7 @@ watch(search, (value) => {
 });
 
 function getContact() {
-    Inertia.get(
+    router.get(
         "/admin/cortes",
         { perPage: perPage.value, search: search.value },
         {

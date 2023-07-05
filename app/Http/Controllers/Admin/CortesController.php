@@ -51,10 +51,14 @@ class CortesController extends Controller
             
         ]);
     }
-    /* public function usePDF(){
+    public function usePDF(){
+        
+        
+        $contacts = Persona::where('reconection','=',1)->get();
 
-        $now = Carbon::now()->format('Y-M-d');
-        $pdf = PDF::loadView('libro.pdf', compact('data'));
+        $pdf = PDF::loadView('libro.cortes-pdf', compact('contacts'));
+
+        /* return $contacts3; */
         return $pdf->stream();
-    } */
+    }
 }

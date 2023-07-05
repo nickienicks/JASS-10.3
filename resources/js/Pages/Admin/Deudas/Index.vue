@@ -42,7 +42,7 @@
                                 <div class="flex">
                                     <select
                                         v-model="perPage"
-                                        @change="getContact"
+                                        @change="getContact1"
                                         class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
                                     >
                                         <option value="5">5 Per Page</option>
@@ -143,16 +143,28 @@ const props = defineProps({
 });
 const search = ref(props.filters.search);
 const perPage = ref("");
+
+
 watch(search, (value) => {
     router.get(
         "/admin/deudas",
-        { search: value, perPage: perPage.value },
+        { perPage: perPage.value, search: search.value },
         {
             preserveState: true,
             replace: true,
         }
     );
 });
+function getContact1() {
+    router.get(
+        "/admin/deudas",
+        { perPage: perPage.value, search: search.value },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+}
 function getContact() {
     router.get(
         `/admin/deudas/${persona.id}/corte-manual/view,`,
