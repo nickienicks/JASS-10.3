@@ -162,6 +162,7 @@ const props = defineProps({
     filters: Object,
     todos: Object,
 });
+console.log(props.contacts)
 const message= "¿Estas seguro que desear eliminar al usuario "
 const search = ref(props.filters.search);
 const perPage = ref("");

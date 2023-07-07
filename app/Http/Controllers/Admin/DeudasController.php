@@ -19,11 +19,17 @@ class DeudasController extends Controller
          $perPage = Request::input('perPage')? : 5;
 
         return Inertia::render("Admin/Deudas/Index", [
-              'contacts' => Persona::query()->when(Request::input('search'), function ($query, $search)
-                                {
-                                    $query->where('first_name', 'like', "%{$search}%")
-                                    ->orWhere('last_name', 'like', "%{$search}%") ;
-                                })
+              'contacts' => Persona::query()->when(request()->input('search'), function ($query, $search) {
+                $searchTerms = explode(' ', $search);
+                $query->where(function ($subquery) use ($searchTerms) {
+                    foreach ($searchTerms as $term) {
+                        $subquery->where(function ($subsubquery) use ($term) {
+                            $subsubquery->where('first_name', 'like', "%{$term}%")
+                                ->orWhere('last_name', 'like', "%{$term}%");
+                        });
+                    }
+                });
+            })
                                 ->latest('id')
                                 ->paginate($perPage)
                                 ->withQueryString()

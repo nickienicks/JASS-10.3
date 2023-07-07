@@ -61,7 +61,7 @@
                                             id="monto"
                                             type="text"
                                             class="mt-1 block w-full"
-                                            v-model="form.monto"
+                                            v-model="calcularMonto"
                                             autofocus
                                             autocomplete="monto"
                                             placeholder="monto de deuda..."
@@ -172,6 +172,39 @@ const form = useForm({
     medida_act: props.deuda.medida_act,
     persona_id: props.persona.id,
 });
+const calcularMonto = computed(() => {
+    let montoTotal = 0;
+    let montoResta = 0;
+    let resta1=0;
+    let resta=0;
+    try {
+        let resta = parseInt(form.medida_act) - parseInt(form.medida_ant);          
+        if (resta <=7 ) {
+        
+                montoTotal = 14;
+           
+        } else {
+            if(resta <=20 ){
+                montoTotal= resta*2;
+            }else{
+                resta1 = resta - 20;
+                montoTotal = ((resta1*3) + 40);
+            }
+            
+            
+        }
+        if(isNaN(montoTotal)){
+            parseFloat(montoTotal);
+        }else{ 
+            form.monto = montoTotal;
+            return montoTotal;
+         } 
+    } catch (error) {
+        console.log(error);
+       
+    }
+});
+
 // const montoCalculado = ref(parseInt(calcularMonto));
 function updateDeuda() {
     router.post(
